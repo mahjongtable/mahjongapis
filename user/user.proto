@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+message CreateUserRequest {
+    optional string username = 1;
+    optional int32 gender = 2;
+    optional string avatar_url = 3;
+    string email = 4;
+    optional string cellphone_number = 5;
+    string password = 6;
+}
+
+message CreateUserResponse {
+    string uid = 1;
+}
+
+message DeleteUserRequest {
+}
+
+message DeleteUserResponse {
+
+}
+
+message GetUserProfileRequest {
+    string uid = 1;
+}
+
+message GetUserProfileResponse {
+    string username = 1;
+    int32 gender = 2;
+    optional string avatar_url = 3;
+}
+
+service User {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse);
+}
