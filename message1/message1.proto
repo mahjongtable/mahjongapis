@@ -13,7 +13,8 @@ message SendSmsRequest {
 
 message SendSmsResponse {
     bool status = 1;
-    string message = 2;
+    optional string subject = 2;
+    string message = 3;
 }
 
 message SendEmailRequest {
