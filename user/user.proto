@@ -8,11 +8,11 @@ message CreateUserRequest {
     optional string avatar_url = 3;
     string email = 4;
     optional string cellphone_number = 5;
-    string password = 6;
+    optional string password = 6;
 }
 
 message CreateUserResponse {
-    string uid = 1;
+    int64 uid = 1;
 }
 
 message DeleteUserRequest {
@@ -23,7 +23,7 @@ message DeleteUserResponse {
 }
 
 message GetUserProfileRequest {
-    string uid = 1;
+    int64 uid = 1;
 }
 
 message GetUserProfileResponse {
