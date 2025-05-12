@@ -45,9 +45,24 @@ message GetTodoResponse {
     google.protobuf.Timestamp updated_at = 6;
 }
 
+message GetTodoListRequest {
+    int32 page = 1;
+    int32 size = 2;
+    // More fields...
+}
+
+message GetTodoListResponse {
+    repeated GetTodoResponse todos = 1;
+    uint32 total = 2;
+    uint32 previous_page = 3;
+    uint32 next_page = 4;
+    uint32 total_pages = 5;
+}
+
 service Todo {
     rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
     rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse);
     rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
     rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+    rpc GetTodoList (GetTodoListRequest) returns (GetTodoListResponse);
 }
