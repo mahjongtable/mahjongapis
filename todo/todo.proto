@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package todo;
+
+// Creating
+message CreateTodoRequest {
+    string title = 1;
+    optional string description = 2;
+}
+
+message CreateTodoResponse {
+    uint64 id = 1;
+}
+
+// Updating
+message UpdateTodoRequest {
+    string title = 1;
+    optional string description = 2;
+    int32 status = 3;
+}
+
+message UpdateTodoResponse {}
+
+// Deleting
+message DeleteTodoRequest {
+    uint64 id = 1;
+}
+
+message DeleteTodoResponse {}
+
+// Getting
+message GetTodoRequest {}
+
+message GetTodoResponse {}
+
+service Todo {
+    rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+    rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse);
+    rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+    rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+}
