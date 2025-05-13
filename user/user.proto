@@ -30,7 +30,7 @@ message GetUserRequest {
 
 message GetUserResponse {
     uint64 id = 1;
-    string username = 2;
+    optional string username = 2;
     int32 gender = 3;
     optional string avatar_url = 4;
     string email = 5;
