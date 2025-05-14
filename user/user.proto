@@ -14,8 +14,19 @@ message CreateUserRequest {
 }
 
 message CreateUserResponse {
-    int64 uid = 1;
+    uint64 uid = 1;
 }
+
+message UpdateUserRequest {
+    uint64 uid = 1;
+    string username = 2;
+    int32 gender = 3;
+    optional string avatar_url = 4;
+    string email = 5;
+    optional string cellphone_number = 6;
+}
+
+message UpdateUserResponse {}
 
 message DeleteUserRequest {
 }
@@ -25,7 +36,7 @@ message DeleteUserResponse {
 }
 
 message GetUserRequest {
-    int64 uid = 1;
+    uint64 uid = 1;
 }
 
 message GetUserResponse {
@@ -40,7 +51,7 @@ message GetUserResponse {
 }
 
 message GetUserProfileRequest {
-    int64 uid = 1;
+    uint64 uid = 1;
 }
 
 message GetUserProfileResponse {
@@ -52,6 +63,7 @@ message GetUserProfileResponse {
 service User {
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
     rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
     rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse);
     rpc GetUser (GetUserRequest) returns (GetUserResponse);
 }
