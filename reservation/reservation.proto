@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package reservation;
+
+enum ReservationStatus {
+    STATUS_PENDING = 0;
+    STATUS_CONFIRMED = 1;
+    STATUS_BLOCKED = 2;
+}
+
+enum ReservationChangelogOprType {
+    CHANGE_OPR_UNKNOWN = 0;
+    CHANGE_OPR_CREATE = 1;
+    CHANGE_OPR_UPDATE = 2;
+    CHANGE_OPR_DELETE = 3;
+}
+
+message Reservation {
+    string id = 1;
+    string user_id = 2;
+    string resource_id = 3;
+    ReservationStatus status = 4;
+    google.protobuf.Timestamp start_at = 5;
+    google.protobuf.Timestamp end_at = 6;
+    string note = 7;
+}
+
+message Query {
+    optional string resource_id = 1;
+    optional string user_id = 2;
+    // If status is NONE, will return ALL reservations.
+    optional ReservationStatus status = 3;
+    optional google.protobuf.Timestamp start_at = 4;
+    optional google.protobuf.Timestamp end_at = 5;
+}
+
+message CreateRequest {
+    Reservation reservation = 1;
+}
+
+message CreateResponse {
+    Reservation reservation = 1;
+}
+
+message UpdateRequest {
+    string note = 1;
+}
+
+message UpdateResponse {
+    Reservation reservation = 1;
+}
+
+message GetRequest {
+    string id = 1;
+}
+
+message GetResponse {
+    Reservation reservation = 1;
+}
+
+message ListRequest {
+    Query query = 1;
+}
+
+message SubscribeRequest {
+
+}
+
+message SubscribeResponse {
+    ReservationChangelogOprType operation = 1;
+    Reservation reservation = 2;
+}
+
+message ConfirmRequest {
+    string id = 1;
+}
+
+message ConfirmResponse {
+    Reservation reservation = 1;
+}
+
+message CancelRequest {
+    string id = 1;
+}
+
+message CancelResponse {
+    Reservation reservation = 1;
+}
+
+service ReservationService {
+    rpc Create (CreateRequest) returns (CreateResponse);
+    rpc Update (UpdateRequest) returns (UpdateResponse);
+    rpc Get (GetRequest) returns (GetResponse);
+    rpc List (ListRequest) returns (stream Reservation);
+    rpc Subscribe (SubscribeRequest) returns (stream SubscribeResponse);
+
+    rpc Confirm (ConfirmRequest) returns (ConfirmResponse);
+    rpc Cancel (ConfirmRequest) returns (ConfirmResponse);
+
+}
