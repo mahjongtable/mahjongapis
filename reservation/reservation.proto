@@ -5,9 +5,10 @@ import "google/protobuf/timestamp.proto";
 package reservation;
 
 enum ReservationStatus {
-    STATUS_PENDING = 0;
-    STATUS_CONFIRMED = 1;
-    STATUS_BLOCKED = 2;
+    STATUS_UNKNOWN = 0;
+    STATUS_PENDING = 1;
+    STATUS_CONFIRMED = 2;
+    STATUS_BLOCKED = 3;
 }
 
 enum ReservationChangelogOprType {
